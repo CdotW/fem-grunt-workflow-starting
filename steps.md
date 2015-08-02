@@ -5,3 +5,5 @@
 - npm install grunt
 - mkdir tasks
 - npm install grunt-contrib-concat --save
+- add to package.json "grunt-contrib-less": "git://github.com/davemo/grunt-contrib-less.git"
+- npm install
