@@ -54,7 +54,12 @@ module.exports = (grunt) ->
         src: "index.html"
         dest: "generated/index.html"
 
-  # loading local tasks
+    server:
+        base: "generated"
+        web:
+            port: 8000
+    
+    # loading local tasks
   grunt.loadTasks "tasks"
 
   # loading external tasks (aka: plugins)
@@ -64,4 +69,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-copy"
 
   # creating workflows
-  grunt.registerTask "default", ["less", "concat", "copy", "watch"]
+  grunt.registerTask "default", ["less", "concat", "copy", "server", "watch"]
