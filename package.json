@@ -29,6 +29,7 @@
     "compression": "^1.5.2",
     "errorhandler": "^1.4.2",
     "express": "^4.13.2",
-    "grunt-open": "^0.2.3"
+    "grunt-open": "^0.2.3",
+    "matchdep": "^0.3.0"
   }
 }
