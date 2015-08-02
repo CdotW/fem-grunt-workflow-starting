@@ -1,0 +1,7 @@
+- pre-existing static assets
+- npm init
+- type NUL > Gruntfile.js
+- npm install grunt-cli -g
+- npm install grunt
+- mkdir tasks
+- npm install grunt-contrib-concat --save
