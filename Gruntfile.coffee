@@ -6,6 +6,9 @@ module.exports = (grunt) ->
 
     # files that our tasks will use
     files:
+      html:
+        src: "index.html"
+
       less:
         src: ["css/style.less"]
 
@@ -25,13 +28,21 @@ module.exports = (grunt) ->
           "js/**/*.js"
         ]
 
-    # task configuration targets
+    # task configuration
     concat:
       js:
         src: "<%= files.js.src %>"
         dest: "generated/js/app.min.js"
 
     watch:
+      options:
+        livereload: true
+
+      # targets for watch
+      html:
+        files: ["<%= files.html.src %>"]
+        tasks: ["copy"]
+
       js:
         files: ["<%= files.js.src %>"]
         tasks: ["concat"]
@@ -49,17 +60,28 @@ module.exports = (grunt) ->
         src: "<%= files.less.src %>"
         dest: "generated/css/style.css"
 
+      dist:
+        options:
+          cleancss: true
+          compress: true
+        src: "<%= files.less.src %>"
+        dest: "dist/css/style.css"
+
     copy:
       html:
-        src: "index.html"
-        dest: "generated/index.html"
+        files:
+          "generated/index.html" : "<%= files.html.src %>"
+          "dist/index.html"      : "<%= files.html.src %>"
 
     server:
-        base: "generated"
-        web:
-            port: 8000
-    
-    # loading local tasks
+      base: "generated"
+      web:
+        port: 8000
+
+    clean:
+      workspaces: ["dist", "generated"]
+
+  # loading local tasks
   grunt.loadTasks "tasks"
 
   # loading external tasks (aka: plugins)
@@ -67,6 +89,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-less"
   grunt.loadNpmTasks "grunt-contrib-copy"
+  grunt.loadNpmTasks "grunt-contrib-clean"
 
   # creating workflows
-  grunt.registerTask "default", ["less", "concat", "copy", "server", "watch"]
+  grunt.registerTask "default", ["less:dev", "concat", "copy", "server", "watch"]
+  grunt.registerTask "build", ["less:dist", "concat", "copy"]

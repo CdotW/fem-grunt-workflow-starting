@@ -10,3 +10,4 @@
 - npm install express --save-dev
 - mkdir tasks
 - type NUL > tasks/server.js
+- install the chrome live-reload extension -- https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en
